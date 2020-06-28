@@ -34,11 +34,11 @@
                 <form class="rating" >
                     <label for="like" id="like">
                         <input type="checkbox" id="like"   @input="changeLiked()" />
-                        <font-awesome-icon icon="heart" id='a' class="icon" style="margin-bottom:0px;margin-right:10px;"/>
+                        <font-awesome-icon icon="heart" id='a' class="icon" style="margin-bottom:0px;margin-right:10px;" ref="heart-icon"/>
                     </label>
                 </form> 
             </div>
-            <div id="output-liked" style="float:right;"> {{pageData.likes}} </div>
+            <div id="output-liked" style="float:right;" ref="like-num"> {{pageData.likes}} </div>
         </div>
         </div>
       </div>
@@ -70,11 +70,11 @@
                 <form class="rating" >
                     <label for="like" id="like">
                         <input type="checkbox" id="like"   @input="changeLiked()" />
-                        <font-awesome-icon icon="heart" id='a' class="icon" style="margin-bottom:0px;margin-right:10px;"/>
+                        <font-awesome-icon icon="heart" id='a' class="icon" style="margin-bottom:0px;margin-right:10px;" ref="heart-icon"/>
                     </label>
                 </form> 
             </div>
-            <div id="output-liked" style="float:right;"> {{pageData.likes}} </div>
+            <div id="output-liked" style="float:right;" ref="like-num"> {{pageData.likes}} </div>
         </div>
         </div>
       </div>
@@ -117,6 +117,20 @@ export default {
       }
   },
 
+  mounted() {
+    console.log(this.pageData.myLike)
+    console.log(this.$refs["heart-icon"])
+    if(this.pageData.myLike===true){
+      this.liked=true;
+      this.$refs["heart-icon"].style.color="#ed4144";
+      this.$refs["like-num"].style.color="#ed4144";
+    }
+    else {
+      this.$refs["heart-icon"].style.color="#2c2c2c";
+      this.$refs["like-num"].style.color="#2c2c2c";
+    }
+  },
+
     methods: {
         changeLiked() {
         this.liked = !this.liked
@@ -149,6 +163,14 @@ export default {
   updated() {
     this.handleView();
     window.addEventListener('resize', this.handleView);
+     if(this.pageData.myLike===true){
+      this.$refs["heart-icon"].style.color="#ed4144";
+      this.$refs["like-num"].style.color="#ed4144";
+    }
+    else {
+      this.$refs["heart-icon"].style.color="#2c2c2c";
+      this.$refs["like-num"].style.color="#2c2c2c";
+    }
 
   },
 
@@ -331,7 +353,7 @@ export default {
     width: auto;
     height: auto;
     position: fixed;
-    top: 75vh;
+    top: 70vh;
     right:7vw;
     padding: 5px 5px 5px 5px;
     border: 0px;

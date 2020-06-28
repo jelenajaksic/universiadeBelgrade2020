@@ -6,10 +6,10 @@
                 <div class="rating" >
                     <label for="like">
                         <input type="checkbox" :id="'like'+index"   @input="changeLiked(index)" />
-                        <font-awesome-icon icon="heart" class="icon" style="margin-bottom:0px;margin-right:10px;"/>
+                        <font-awesome-icon icon="heart" class="icon" style="margin-bottom:0px;margin-right:10px;" ref="heart-icon"/>
                     </label>
                 </div> 
-            <div :id="'output-liked'+index" style="float:right;"> {{site.likes}}</div>
+            <div :id="'output-liked'+index" style="float:right;" ref="like-num"> {{site.likes}}</div>
         </div>
   </div>
 </template>
@@ -42,6 +42,29 @@ export default {
     
     
   }),
+
+  mounted() {
+    if(this.site.myLike===true){
+      this.liked=true;
+      this.$refs["heart-icon"].style.color="#ed4144";
+      this.$refs["like-num"].style.color="#ed4144";
+    }
+    else {
+      this.$refs["heart-icon"].style.color="#2c2c2c";
+      this.$refs["like-num"].style.color="#2c2c2c";
+    }
+  },
+
+  updated() {
+    if(this.site.myLike===true){
+      this.$refs["heart-icon"].style.color="#ed4144";
+      this.$refs["like-num"].style.color="#ed4144";
+    }
+    else {
+      this.$refs["heart-icon"].style.color="#2c2c2c";
+      this.$refs["like-num"].style.color="#2c2c2c";
+    }
+  },
 
   methods: {
     changeLiked(index) {
