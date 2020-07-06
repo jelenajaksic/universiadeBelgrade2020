@@ -111,7 +111,6 @@ export default {
           liked: false,
            mobileView: false,
            tabletView: false,
-
            showPicID: 1,
 
       }
